@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        #author1 {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        #text {
+            font-size: 24px;
+            font-style: italic;
+            color: #555;
+            margin: 20px 0;
+        }
+
+        #tag {
+            font-size: 16px;
+            color: #888;
+        }
+
+        #btn {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        #btn:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+
+<body>
+  
+
+<div class="container">
+    <div id="author1">Author Name</div>
+    <p id="text">Quote text will appear here.</p>
+    <p id="tag">#Tag</p>
+    <button id="btn" onclick="myFunction()">Click me</button>
+</div>
+
+
+<script>
+    let data ;
+    let author = document.getElementById('author1');
+    let text = document.getElementById('text');
+    let tag = document.getElementById('tag');
+    
+    function myFunction2() {
+        const objlist = data[Math.floor(Math.random() * data.length)];
+        console.log(objlist.author);
+
+        author.textContent = objlist.author;
+        text.textContent = objlist.text;
+        tag.textContent = `--${objlist.tag};`
+    }
+
+    async function myFunction() {
+        const apiurl = 'https://jacintodesign.github.io/quotes-api/data/quotes.json';
+        try{
+            const response = await fetch(apiurl);
+            data = await response.json();
+            console.log(data);
+            myFunction2();
+        }
+        catch(error){
+            console.error(error);
+        }
+    }
+
+    myFunction();
+</script>
+
+</body>
+
+</html>
